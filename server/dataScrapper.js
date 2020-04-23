@@ -8,8 +8,38 @@ function dataFilter(rawData, callback){
     }
 
     dataArray = dataArray.filter(item => !item.includes('<'))
+
+    let filter = { }
+    dataArray = dataArray.filter((item, i) => {
+        // console.log(item.split(url).join('').split(/(.*?)\//))
+        filterItem = item.split(/(.*?)\//)
+        for(let i = 0; i < filterItem.length; i++){
+            if(filterItem[i] != '' && filterItem[i] != 'https:' && !filterItem[i].includes('www.')){
+                if(filter.hasOwnProperty(filterItem[i])){
+                    filter[filterItem[i]] += 1 
+                }else{  
+                    filter[filterItem[i]] = 1
+                }
+            }
+
+        }
+
+        return item
+    })
     
-    callback(dataArray)
+
+    Object.getOwnPropertyNames(filter).forEach(element => {
+        if(filter[element] < 5) delete filter[element]
+        else if(!isNaN(element)) delete filter[element]
+    });
+
+
+    console.log(filter)
+    data = {
+        dataArray,
+        filter
+    }
+    callback(data)
 }
 
 module.exports = dataFilter

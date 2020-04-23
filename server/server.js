@@ -17,7 +17,7 @@ server.post('/v1/api/', (req, res) => {
     request
         .get(fullUrl)
         .then(html => {
-            console.log(html)
+            // console.log(html)
             func(html, (data) => {
                 res.json(data)
             })

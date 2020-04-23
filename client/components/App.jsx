@@ -6,7 +6,8 @@ class App extends React.Component {
     super(props)
 
     this.state = {
-      sitemapXML: ''
+      sitemapXML: '',
+      filters: ''
     }
   }
   handleSubmit = (e) => {
@@ -14,7 +15,8 @@ class App extends React.Component {
     getData({url: this.state.url})
       .then(data => {
         this.setState({
-          sitemapXML: data
+          sitemapXML: data.dataArray,
+          filters: data.filter
         })
       })
   }
