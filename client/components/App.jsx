@@ -1,5 +1,6 @@
 import React from 'react'
 import { getData } from '../apis/api'
+import {applySimpleFilter, applyComplexFilter} from '../utils'
 
 class App extends React.Component {
   constructor(props){
@@ -7,6 +8,7 @@ class App extends React.Component {
 
     this.state = {
       sitemapXML: '',
+      filteredXML: '',
       filters: ''
     }
   }
@@ -16,6 +18,7 @@ class App extends React.Component {
       .then(data => {
         this.setState({
           sitemapXML: data.dataArray,
+          filteredXML: data.dataArray,
           filters: data.filter
         })
       })
@@ -27,8 +30,24 @@ class App extends React.Component {
     })
   }
 
+  handleClick = (e) => {
+    if(e.target.id){
+      applySimpleFilter(this.state.sitemapXML, e.target.id, filteredData => {
+        this.setState({ filteredXML: filteredData })
+      })
+    }else{
+      this.setState({filteredXML: this.state.sitemapXML})
+    }
+  }
+
+  handleClickComplex = () => {
+    applyComplexFilter(this.state.sitemapXML, this.state.filters, filteredData => {
+      this.setState({ filteredXML: filteredData})
+    })
+  }
+
   render(){
-    const siteData = this.state.sitemapXML ? this.state.sitemapXML : false 
+    const siteData = this.state.filteredXML ? this.state.filteredXML : false 
     return (
       <>
         <h1>Get sitemap.xml data</h1>
@@ -42,10 +61,23 @@ class App extends React.Component {
         {
           siteData &&
          <>
-           <h1>All the possible links on this site</h1>
+         <div className='p-2'>
+            <h1>All the possible links on this site</h1>
+            <h3>Filter options</h3>
+            <p>Show only one of the following filters</p>
+            <button onClick={this.handleClick}>RESET FILTERS</button>
+            <button onClick={this.handleClickComplex}>EXCLUDE THESE FILTERS</button>
+         </div>
+         <div className='p-2'>
+            {
+              Object.getOwnPropertyNames(this.state.filters).map(item => {
+                return <button className='' key={item} id={item} onClick={this.handleClick}>{item}</button>
+              })
+            }
+          </div>
           <ul>
-            {siteData.map(item => {
-              return <li>
+            {siteData.map((item, i) => {
+              return <li key={i}>
                 <a href={item}>{item}</a>
               </li>
             })}
