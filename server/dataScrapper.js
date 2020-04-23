@@ -42,4 +42,14 @@ function dataFilter(rawData, callback){
     callback(data)
 }
 
-module.exports = dataFilter
+function getSitemapLink(robotsTxt, callback){
+    callback(robotsTxt.text
+        .split('\n')
+        .filter(item => item.includes('sitemap'))
+        .map(item => item.slice(item.indexOf('https'))))
+}
+
+module.exports = {
+    dataFilter,
+    getSitemapLink
+}
