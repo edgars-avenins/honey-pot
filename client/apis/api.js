@@ -14,7 +14,7 @@ export const getRobotData = (url) => {
                 let {url} = goodUrl
                 console.log(url, goodUrl);
                 
-                url += '/sitemap.xml'
+                url += 'sitemap.xml'
                 return getXMLData({url: url})
             }
             return res.body
