@@ -1,5 +1,5 @@
 import React from 'react'
-import { getData } from '../apis/api'
+import { getRobotData, getXMLData } from '../apis/api'
 import {applySimpleFilter, applyComplexFilter} from '../utils'
 
 class App extends React.Component {
@@ -9,45 +9,69 @@ class App extends React.Component {
     this.state = {
       sitemapXML: '',
       filteredXML: '',
-      filters: ''
+      filters: '',
+      availableXML: false
     }
   }
   handleSubmit = (e) => {
     e.preventDefault()
-    getData({url: this.state.url})
+    getRobotData({url: this.state.url})
       .then(data => {
+        if(!data.length)
         this.setState({
           sitemapXML: data.dataArray,
           filteredXML: data.dataArray,
           filters: data.filter
         })
+        else{
+          this.setState({ availableXML: data})
+        }
       })
-  }
-
-  handleChange = (e) => {
-    this.setState({
-      [e.target.name]: e.target.value
-    })
-  }
-
-  handleClick = (e) => {
-    if(e.target.id){
-      applySimpleFilter(this.state.sitemapXML, e.target.id, filteredData => {
-        this.setState({ filteredXML: filteredData })
-      })
-    }else{
-      this.setState({filteredXML: this.state.sitemapXML})
     }
-  }
-
-  handleClickComplex = () => {
-    applyComplexFilter(this.state.sitemapXML, this.state.filters, filteredData => {
+    
+    handleChange = (e) => {
+      this.setState({
+        [e.target.name]: e.target.value
+      })
+    }
+    
+    handleClick = (e) => {
+      if(e.target.id){
+        applySimpleFilter(this.state.sitemapXML, e.target.id, filteredData => {
+          this.setState({ filteredXML: filteredData })
+        })
+      }else{
+        this.setState({filteredXML: this.state.sitemapXML})
+      }
+    }
+    
+    handleClickComplex = () => {
+      applyComplexFilter(this.state.sitemapXML, this.state.filters, filteredData => {
       this.setState({ filteredXML: filteredData})
     })
   }
+  
+  handleXMLOption = (e) => {
+    getXMLData({url: e.target.id})
+    .then(data => {
+      console.log(data);
+      
+      if(data.isXML){
+        this.setState({ availableXML: data.dataArray})
+      }else{
+        console.log('here')
+        this.setState({
+          sitemapXML: data.dataArray,
+          filteredXML: data.dataArray,
+          filters: data.filter
+          })
+      }
+      })
+  }
 
   render(){
-    const siteData = this.state.filteredXML ? this.state.filteredXML : false 
+    const siteXMLData = this.state.filteredXML ? this.state.filteredXML : false 
+    const siteXMLOptions = this.state.availableXML
     return (
       <>
         <h1>Get sitemap.xml data</h1>
@@ -59,7 +83,7 @@ class App extends React.Component {
         </form>
 
         {
-          siteData &&
+          siteXMLData &&
          <>
          <div className='p-2'>
             <h1>All the possible links on this site</h1>
@@ -76,13 +100,34 @@ class App extends React.Component {
             }
           </div>
           <ul>
-            {siteData.map((item, i) => {
+            {siteXMLData.map((item, i) => {
               return <li key={i}>
+                {/* make a function that decides if the link is .xml
+                go deeper into the xml tree otherwise show an 
+                a tag link to the actual page */}
                 <a href={item}>{item}</a>
               </li>
             })}
           </ul>
          </>
+        }
+        {
+          (!siteXMLData && siteXMLOptions) && 
+          <>
+            <div className='p-2'>
+              <h1>All the possible xml sitemaps on this site</h1>
+              <p>Choose one to display its content</p>
+            </div>
+            <ul>
+              {
+                siteXMLOptions.map(item => {
+                  return <li onClick={this.handleXMLOption} id={item} key={item}>
+                    {item}
+                  </li>
+                })
+              }
+            </ul>
+          </>
         }
       </>
     )
