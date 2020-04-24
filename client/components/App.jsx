@@ -5,7 +5,7 @@ import {applySimpleFilter, applyComplexFilter} from '../utils'
 class App extends React.Component {
   constructor(props){
     super(props)
-
+    
     this.state = {
       sitemapXML: '',
       filteredXML: '',
@@ -16,15 +16,16 @@ class App extends React.Component {
   handleSubmit = (e) => {
     e.preventDefault()
     getRobotData({url: this.state.url})
-      .then(data => {
-        if(!data.length)
+    .then(data => {
+      console.log(data);
+        if(!data.isXML)
         this.setState({
           sitemapXML: data.dataArray,
           filteredXML: data.dataArray,
           filters: data.filter
         })
         else{
-          this.setState({ availableXML: data})
+          this.setState({ availableXML: data.dataArray})
         }
       })
     }
@@ -54,7 +55,6 @@ class App extends React.Component {
   handleXMLOption = (e) => {
     getXMLData({url: e.target.id})
     .then(data => {
-      console.log(data);
       
       if(data.isXML){
         this.setState({ availableXML: data.dataArray})

@@ -1,5 +1,5 @@
 
-function dataFilter(rawData, callback){
+function dataFilter(rawData, url, callback){
     let dataArray = []
     if(rawData.text){
         dataArray = rawData.text.split(/<loc>(.*?)<\/loc>/)
@@ -14,7 +14,8 @@ function dataFilter(rawData, callback){
         // console.log(item.split(url).join('').split(/(.*?)\//))
         filterItem = item.split(/(.*?)\//)
         for(let i = 0; i < filterItem.length; i++){
-            if(filterItem[i] != '' && filterItem[i] != 'http' && !filterItem[i].includes('www.')){
+
+            if(filterItem[i] != '' && filterItem[i] != 'https:' && filterItem[i] != 'http:' && !filterItem[i].includes('www.')){
                 if(filter.hasOwnProperty(filterItem[i])){
                     filter[filterItem[i]] += 1 
                 }else{  
@@ -26,9 +27,15 @@ function dataFilter(rawData, callback){
 
         return item
     })
+    console.log(url);
     
+    let isXML = false
 
     Object.getOwnPropertyNames(filter).forEach(element => {
+        console.log(element)
+        if(element.includes('sitemap')){
+            isXML = true
+        }
         if(filter[element] < 5) delete filter[element]
         else if(!isNaN(element)) delete filter[element]
     });
@@ -37,11 +44,10 @@ function dataFilter(rawData, callback){
     console.log(filter)
     data = {
         dataArray,
-        filter
+        filter,
+        isXML: isXML
     }
-    if(filter.sitemap){
-        data.isXML = true
-    }
+
     callback(data)
 }
 
