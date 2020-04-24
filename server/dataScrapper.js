@@ -27,7 +27,7 @@ function dataFilter(rawData, url, callback){
 
         return item
     })
-    console.log('Why am I ??? ',url);
+    console.log('Why am I ??? ',url, rawdata);
     
     let isXML = false
 
