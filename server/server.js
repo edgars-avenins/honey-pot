@@ -10,19 +10,41 @@ const server = express()
 server.use(express.json())
 server.use(express.static(path.join(__dirname, './public')))
 
+//get information from robots.txt
 server.post('/v1/api/', (req, res) => {
     const {url} = req.body
-    const fullUrl = url + 'sitemap.xml'
+    const fullUrl = url + 'robots.txt'
     
     request
         .get(fullUrl)
         .then(html => {
             // console.log(html)
-            func(html, (data) => {
+            func.getSitemapLink(html, (data) => {
                 res.json(data)
             })
         })
-        .catch('This is errrorrrr')
+        .catch(err => console.error(err.error)
+        )
+})
+
+//get information from sitemap.xml
+server.post('/v1/api/xml/', (req, res) => {
+    const {url} = req.body
+
+    console.log('xml get: ', url);
+    
+    request
+        .get(url)
+        .then(html => {
+            func.dataFilter(html, (data) => {
+                res.json(data)
+            })
+        })
+        .catch(err => {
+            console.error('\n',err.response.error,'\n')
+            //res.json(err.response.error)
+            res.status(err.response.error.status).json('oh no, error')
+        })
 })
 
 module.exports = server
