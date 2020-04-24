@@ -36,7 +36,7 @@ server.post('/v1/api/xml/', (req, res) => {
     request
         .get(url)
         .then(html => {
-            func.dataFilter(html, (data) => {
+            func.dataFilter(html, url, (data) => {
                 res.json(data)
             })
         })
