@@ -14,7 +14,7 @@ function dataFilter(rawData, callback){
         // console.log(item.split(url).join('').split(/(.*?)\//))
         filterItem = item.split(/(.*?)\//)
         for(let i = 0; i < filterItem.length; i++){
-            if(filterItem[i] != '' && filterItem[i] != 'https:' && !filterItem[i].includes('www.')){
+            if(filterItem[i] != '' && filterItem[i] != 'http' && !filterItem[i].includes('www.')){
                 if(filter.hasOwnProperty(filterItem[i])){
                     filter[filterItem[i]] += 1 
                 }else{  
@@ -38,6 +38,9 @@ function dataFilter(rawData, callback){
     data = {
         dataArray,
         filter
+    }
+    if(filter.sitemap){
+        data.isXML = true
     }
     callback(data)
 }
