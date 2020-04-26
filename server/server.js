@@ -42,7 +42,7 @@ server.post('/v1/api/xml/', (req, res) => {
         .catch(err => {
             console.error('\n',err.response,'\n')
             //res.json(err.response.error)
-            res.json('oh no, error')
+            res.status(err.response.status).json(err.response.text)
         })
 })
 
