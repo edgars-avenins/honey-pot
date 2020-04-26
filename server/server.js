@@ -17,6 +17,8 @@ server.post('/v1/api/', (req, res) => {
     const {url} = req.body
     const fullUrl = url + 'robots.txt'
     
+    console.log(fullUrl);
+    
     request
         .get(fullUrl)
         .then(html => {
