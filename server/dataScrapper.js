@@ -6,15 +6,16 @@ function dataFilter(rawData, url, callback){
     }else{
         dataArray = rawData.body.toString().split(/<loc>(.*?)<\/loc>/)
     }
-
+    console.log('dataArray1:',dataArray)
     dataArray = dataArray.filter(item => !item.includes('<'))
-
+    console.log('dataArray1:',dataArray)
+    
     let filter = { }
     dataArray = dataArray.filter((item, i) => {
         // console.log(item.split(url).join('').split(/(.*?)\//))
         filterItem = item.split(/(.*?)\//)
         for(let i = 0; i < filterItem.length; i++){
-
+            
             if(filterItem[i] != '' && filterItem[i] != 'https:' && filterItem[i] != 'http:' && !filterItem[i].includes('www.')){
                 if(filter.hasOwnProperty(filterItem[i])){
                     filter[filterItem[i]] += 1 
@@ -22,11 +23,12 @@ function dataFilter(rawData, url, callback){
                     filter[filterItem[i]] = 1
                 }
             }
-
+            
         }
-
+        
         return item
     })
+    console.log('dataArray1:',dataArray)
     console.log('Why am I ??? ',url, rawdata);
     
     let isXML = false
