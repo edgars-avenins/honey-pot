@@ -19,8 +19,7 @@ export const getRobotData = (url) => {
             getXMLData({url: url})
                 .then(res => res.body)
 
-        }
-        return res.body
+        }else return res.body
     })
     .catch(err => console.error(err))
 }
