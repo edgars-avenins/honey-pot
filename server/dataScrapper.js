@@ -9,10 +9,14 @@ function dataFilter(rawData, url, callback){
     dataArray = dataArray.filter(item => !item.includes('<'))
     
     let filter = { }
+    let isXML = false
+
     dataArray = dataArray.filter((item, i) => {
         filterItem = item.split(/(.*?)\//)
         for(let i = 0; i < filterItem.length; i++){
-            console.log(url, filterItem[i]);
+            if(filterItem[i].includes('sitemap')){
+                isXML = true
+            }
             
             if(filterItem[i] != '' && filterItem[i] != 'https:' && filterItem[i] != 'http:' && !filterItem[i].includes('www.') && !url.includes(filterItem[i])){
                 if(filter.hasOwnProperty(filterItem[i])){
@@ -28,12 +32,8 @@ function dataFilter(rawData, url, callback){
     })
     
     
-    let isXML = false
-
+    console.log(filter)
     Object.getOwnPropertyNames(filter).forEach(element => {
-        if(element.includes('sitemap')){
-            isXML = true
-        }
         if(filter[element] < 5) delete filter[element]
         else if(!isNaN(element)) delete filter[element]
     });
