@@ -17,15 +17,15 @@ class App extends React.Component {
     e.preventDefault()
     getRobotData({url: this.state.url})
     .then(data => {
-      console.log(data);
-        if(!data.isXML)
+      console.log(data)
+        if(data.isXML && !data.isXML)
         this.setState({
           sitemapXML: data.dataArray,
           filteredXML: data.dataArray,
           filters: data.filter
         })
         else{
-          this.setState({ availableXML: data.dataArray})
+          this.setState({ availableXML: data})
         }
       })
     }
@@ -59,7 +59,6 @@ class App extends React.Component {
       if(data.isXML){
         this.setState({ availableXML: data.dataArray})
       }else{
-        console.log('here')
         this.setState({
           sitemapXML: data.dataArray,
           filteredXML: data.dataArray,
@@ -74,7 +73,7 @@ class App extends React.Component {
     const siteXMLOptions = this.state.availableXML
     return (
       <>
-        <h1>Get sitemap.xml data</h1>
+        <h1>Get robots.txt data</h1>
         <form onSubmit={this.handleSubmit}>
           <label>
             <input type="text" name="url" onChange={this.handleChange} />

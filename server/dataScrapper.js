@@ -6,45 +6,42 @@ function dataFilter(rawData, url, callback){
     }else{
         dataArray = rawData.body.toString().split(/<loc>(.*?)<\/loc>/)
     }
-
     dataArray = dataArray.filter(item => !item.includes('<'))
-
+    
     let filter = { }
+    let isXML = false
+
     dataArray = dataArray.filter((item, i) => {
-        // console.log(item.split(url).join('').split(/(.*?)\//))
         filterItem = item.split(/(.*?)\//)
         for(let i = 0; i < filterItem.length; i++){
-
-            if(filterItem[i] != '' && filterItem[i] != 'https:' && filterItem[i] != 'http:' && !filterItem[i].includes('www.')){
+            if(filterItem[i].includes('sitemap')){
+                isXML = true
+            }
+            
+            if(filterItem[i] != '' && filterItem[i] != 'https:' && filterItem[i] != 'http:' && !filterItem[i].includes('www.') && !url.includes(filterItem[i])){
                 if(filter.hasOwnProperty(filterItem[i])){
                     filter[filterItem[i]] += 1 
                 }else{  
                     filter[filterItem[i]] = 1
                 }
             }
-
+            
         }
-
+        
         return item
     })
-    console.log(url);
     
-    let isXML = false
-
+    
+    console.log(filter)
     Object.getOwnPropertyNames(filter).forEach(element => {
-        console.log(element)
-        if(element.includes('sitemap')){
-            isXML = true
-        }
         if(filter[element] < 5) delete filter[element]
         else if(!isNaN(element)) delete filter[element]
     });
 
 
-    console.log(filter)
     data = {
-        dataArray,
-        filter,
+        dataArray: dataArray,
+        filter: filter,
         isXML: isXML
     }
 
@@ -52,6 +49,7 @@ function dataFilter(rawData, url, callback){
 }
 
 function getSitemapLink(robotsTxt, callback){
+    
     callback(robotsTxt.text
         .split('\n')
         .filter(item => item.includes('sitemap'))
