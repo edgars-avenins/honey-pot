@@ -6,13 +6,10 @@ function dataFilter(rawData, url, callback){
     }else{
         dataArray = rawData.body.toString().split(/<loc>(.*?)<\/loc>/)
     }
-    console.log('dataArray1:',dataArray)
     dataArray = dataArray.filter(item => !item.includes('<'))
-    console.log('dataArray1:',dataArray)
     
     let filter = { }
     dataArray = dataArray.filter((item, i) => {
-        // console.log(item.split(url).join('').split(/(.*?)\//))
         filterItem = item.split(/(.*?)\//)
         for(let i = 0; i < filterItem.length; i++){
             
@@ -28,15 +25,11 @@ function dataFilter(rawData, url, callback){
         
         return item
     })
-    console.log(filter)
     
-    console.log('dataArray1:',dataArray)
-    console.log('Why am I ??? ')
     
     let isXML = false
 
     Object.getOwnPropertyNames(filter).forEach(element => {
-        console.log(element)
         if(element.includes('sitemap')){
             isXML = true
         }
@@ -45,7 +38,6 @@ function dataFilter(rawData, url, callback){
     });
 
 
-    console.log(filter)
     data = {
         dataArray: dataArray,
         filter: filter,
@@ -56,7 +48,6 @@ function dataFilter(rawData, url, callback){
 }
 
 function getSitemapLink(robotsTxt, callback){
-    console.log('robotsTxt: ',robotsTxt);
     
     callback(robotsTxt.text
         .split('\n')

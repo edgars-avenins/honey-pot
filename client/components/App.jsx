@@ -17,7 +17,6 @@ class App extends React.Component {
     e.preventDefault()
     getRobotData({url: this.state.url})
     .then(data => {
-      console.log(data);
         if(data.isXML && !data.isXML)
         this.setState({
           sitemapXML: data.dataArray,
@@ -59,7 +58,6 @@ class App extends React.Component {
       if(data.isXML){
         this.setState({ availableXML: data.dataArray})
       }else{
-        console.log('here')
         this.setState({
           sitemapXML: data.dataArray,
           filteredXML: data.dataArray,

@@ -17,11 +17,9 @@ server.post('/v1/api/', (req, res) => {
     const {url} = req.body
     const fullUrl = url + 'robots.txt'
     
-    console.log(fullUrl);
     
     request('get', fullUrl)
         .then(html => {
-            // console.log(html)
             func.getSitemapLink(html, (data) => {
                 res.json(data)
             })
@@ -34,7 +32,6 @@ server.post('/v1/api/', (req, res) => {
 server.post('/v1/api/xml/', (req, res) => {
     const {url} = req.body
 
-    console.log('xml get: ', url);
     
     request('get', url)
         .then(html => {           
