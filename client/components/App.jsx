@@ -74,8 +74,16 @@ class App extends React.Component {
     const siteXMLOptions = this.state.availableXML
     return (
       <>
-        <h1>Get sitemap.xml data</h1>
+        <h1>Get robots.txt data</h1>
         <form onSubmit={this.handleSubmit}>
+          <label>
+            <input type="text" name="url" onChange={this.handleChange} />
+          </label>
+            <input type="submit" />
+        </form>
+
+        <h1>Get sitemap.xml data</h1>
+        <form onSubmit={()=> {getXMLData(this.state.url)}}>
           <label>
             <input type="text" name="url" onChange={this.handleChange} />
           </label>
