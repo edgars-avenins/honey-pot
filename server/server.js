@@ -38,6 +38,8 @@ server.post('/v1/api/xml/', (req, res) => {
     
     request('get', url)
         .then(html => {
+            console.log('HERE?');
+            
             func.dataFilter(html, url, (data) => {
                 res.json(data)
             })
