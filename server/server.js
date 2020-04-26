@@ -1,12 +1,13 @@
 const path = require('path')
 const express = require('express')
 const request = require('superagent')
+const cors = require('cors')
 
 const func = require('./dataScrapper')
 
 const server = express()
 
-
+server.use(cors('*'))
 server.use(express.json())
 server.use(express.static(path.join(__dirname, './public')))
 
