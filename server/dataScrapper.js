@@ -47,8 +47,8 @@ function dataFilter(rawData, url, callback){
 
     console.log(filter)
     data = {
-        dataArray,
-        filter,
+        dataArray: dataArray,
+        filter: filter,
         isXML: isXML
     }
 
