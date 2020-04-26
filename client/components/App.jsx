@@ -80,14 +80,6 @@ class App extends React.Component {
             <input type="submit" />
         </form>
 
-        <h1>Get sitemap.xml data</h1>
-        <form onSubmit={()=> {getXMLData({url: this.state.url})}}>
-          <label>
-            <input type="text" name="url" onChange={this.handleChange} />
-          </label>
-            <input type="submit" />
-        </form>
-
         {
           siteXMLData &&
          <>

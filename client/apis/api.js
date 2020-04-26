@@ -9,14 +9,14 @@ export const getRobotData = (url) => {
     .send(goodUrl)
     .then(res => {
         if(res.body.length == 1){
-            return getXMLData({url: res.body[0]})
+            getXMLData({url: res.body[0]})
                 .then(res => res.body)
         }
         else if(res.body.length == 0){
             let {url} = goodUrl
             
             url += 'sitemap.xml'
-            return getXMLData({url: url})
+            getXMLData({url: url})
                 .then(res => res.body)
 
         }
