@@ -8,6 +8,7 @@ export const getRobotData = (url) => {
         .send(goodUrl)
         .then(res => {
             if(res.body.length == 1){
+                console.log('getRobotData length == 1: ',res.body)
                 return getXMLData({url: res.body[0]})
             }
             else if(res.body.length == 0){

@@ -25,7 +25,7 @@ class App extends React.Component {
           filters: data.filter
         })
         else{
-          this.setState({ availableXML: data.dataArray})
+          this.setState({ availableXML: data})
         }
       })
     }
