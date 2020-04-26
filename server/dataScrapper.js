@@ -52,6 +52,8 @@ function dataFilter(rawData, url, callback){
 }
 
 function getSitemapLink(robotsTxt, callback){
+    console.log(robotsTxt.text);
+    
     callback(robotsTxt.text
         .split('\n')
         .filter(item => item.includes('sitemap'))

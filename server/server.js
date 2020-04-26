@@ -19,8 +19,7 @@ server.post('/v1/api/', (req, res) => {
     
     console.log(fullUrl);
     
-    request
-        .get(fullUrl)
+    request('get', fullUrl)
         .then(html => {
             // console.log(html)
             func.getSitemapLink(html, (data) => {
@@ -37,8 +36,7 @@ server.post('/v1/api/xml/', (req, res) => {
 
     console.log('xml get: ', url);
     
-    request
-        .get(url)
+    request('get', url)
         .then(html => {
             func.dataFilter(html, url, (data) => {
                 res.json(data)
