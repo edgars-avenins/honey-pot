@@ -17,6 +17,7 @@ class App extends React.Component {
     e.preventDefault()
     getRobotData({url: this.state.url})
     .then(data => {
+      console.log(data)
         if(data.isXML && !data.isXML)
         this.setState({
           sitemapXML: data.dataArray,

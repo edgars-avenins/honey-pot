@@ -12,8 +12,9 @@ function dataFilter(rawData, url, callback){
     dataArray = dataArray.filter((item, i) => {
         filterItem = item.split(/(.*?)\//)
         for(let i = 0; i < filterItem.length; i++){
+            console.log(url, filterItem[i]);
             
-            if(filterItem[i] != '' && filterItem[i] != 'https:' && filterItem[i] != 'http:' && !filterItem[i].includes('www.')){
+            if(filterItem[i] != '' && filterItem[i] != 'https:' && filterItem[i] != 'http:' && !filterItem[i].includes('www.') && !url.includes(filterItem[i])){
                 if(filter.hasOwnProperty(filterItem[i])){
                     filter[filterItem[i]] += 1 
                 }else{  
