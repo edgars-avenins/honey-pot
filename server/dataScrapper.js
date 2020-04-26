@@ -28,8 +28,10 @@ function dataFilter(rawData, url, callback){
         
         return item
     })
+    console.log(filter)
+    
     console.log('dataArray1:',dataArray)
-    console.log('Why am I ??? ',url, rawdata);
+    console.log('Why am I ??? ')
     
     let isXML = false
 
