@@ -56,7 +56,7 @@ function dataFilter(rawData, url, callback){
 }
 
 function getSitemapLink(robotsTxt, callback){
-    console.log(robotsTxt.text);
+    console.log('robotsTxt: ',robotsTxt);
     
     callback(robotsTxt.text
         .split('\n')
