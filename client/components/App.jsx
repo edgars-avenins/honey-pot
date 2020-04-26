@@ -83,7 +83,7 @@ class App extends React.Component {
         </form>
 
         <h1>Get sitemap.xml data</h1>
-        <form onSubmit={()=> {getXMLData(this.state.url)}}>
+        <form onSubmit={()=> {getXMLData({url: this.state.url})}}>
           <label>
             <input type="text" name="url" onChange={this.handleChange} />
           </label>
