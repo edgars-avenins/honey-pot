@@ -38,7 +38,7 @@ server.post('/v1/api/xml/', (req, res) => {
     
     request('get', url)
         .then(html => {
-            console.log('HERE?');
+            console.log('HERE?','\n',html.text,'\n\n\n\n\n',html.body,'\n\n\n\n\n\n', html);
             
             func.dataFilter(html, url, (data) => {
                 res.json(data)
