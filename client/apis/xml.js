@@ -5,7 +5,7 @@ export const getRobotData = (url) => {
     const goodUrl = validateUrl(url)
     
     return request
-    .post(`/v1/api/`)
+    .post(`/api/v1/getxml/robots`)
     .send(goodUrl)
     .then(res => res.body)
     .catch(err => console.error(err))
@@ -13,7 +13,7 @@ export const getRobotData = (url) => {
 
 export const getXMLData = (url) => {    
     return request
-    .post('/v1/api/xml/')
+    .post('/api/v1/getxml/xml/')
     .send(url)
     .then(res => {
         return res.body
