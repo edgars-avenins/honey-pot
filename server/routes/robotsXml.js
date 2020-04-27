@@ -1,7 +1,7 @@
 const router = require('express').Router()
 const request = require('superagent')
 
-const func = require('../dataScrapper')
+const func = require('../functions/xml2links')
 
 
 //get information from robots.txt
