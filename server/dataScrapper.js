@@ -32,7 +32,6 @@ function dataFilter(rawData, url, callback){
     })
     
     
-    console.log(filter)
     Object.getOwnPropertyNames(filter).forEach(element => {
         if(filter[element] < 5) delete filter[element]
         else if(!isNaN(element)) delete filter[element]
