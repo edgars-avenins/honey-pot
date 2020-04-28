@@ -46,9 +46,7 @@ function dataFilter(rawData, url, callback){
         
         newFilter.push(newPair)
     })
-    
-    console.log(newFilter);
-    
+        
     let doneFilter = {}
     
     newFilter.map(item => {
@@ -72,11 +70,11 @@ function dataFilter(rawData, url, callback){
                     doneFilter[subCat][el] = 0
                 }
             }
+            return el
         })
+        return item
     })
     
-    console.log(doneFilter);
-    console.log(filter);
     
 
 
