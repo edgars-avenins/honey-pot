@@ -64,7 +64,7 @@ class StuffToday extends React.Component {
             <p>Show only one of the following filters</p>
           </div>
         
-          <div className='py-1 mb-3 bg bg-light'>
+          <div className='py-1 mb-3 bg bg-light text-center'>
             {
               Object.getOwnPropertyNames(this.state.filters).map(item => {
                 return <button className='p-1 m-1 btn btn-info' key={item} id={item} onClick={this.handleClickSimple}>{item}</button>
