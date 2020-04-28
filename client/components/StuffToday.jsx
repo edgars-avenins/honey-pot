@@ -15,6 +15,7 @@ class StuffToday extends React.Component {
   }
   
   handleClick = (e) => {
+    this.setState({years: e.target.id})
     getNews(e.target.id)
       .then(data => {
         this.setState({
@@ -36,8 +37,8 @@ class StuffToday extends React.Component {
   }
 
   handleClickComplex = () => {
-    applyComplexFilter(this.state.sitemapXML, this.state.filters, filteredData => {
-      this.setState({ filteredXML: filteredData })
+    applyComplexFilter(this.state.links, this.state.filters, filteredData => {
+      this.setState({ filteredData: filteredData })
     })
   }
 
@@ -45,37 +46,51 @@ class StuffToday extends React.Component {
     //nestrada filtrs -salabo!
     return (
       <>
-        <h1>Today ... years ago</h1>
-        <button onClick={this.handleClick} id='1'>1</button>
-        <button onClick={this.handleClick} id='2'>2</button>
-        <button onClick={this.handleClick} id='3'>3</button>
-        <button onClick={this.handleClick} id='4'>4</button>
-        <button onClick={this.handleClick} id='5'>5</button>
+        <div className='text-center pb-5'>
+          <h1>Today {this.state.years ? this.state.years : '...'} years ago</h1>
+          <button className='btn btn-lg btn-danger px-3 m-1' onClick={this.handleClick} id='1'>1</button>
+          <button className='btn btn-lg btn-danger px-3 m-1' onClick={this.handleClick} id='2'>2</button>
+          <button className='btn btn-lg btn-danger px-3 m-1' onClick={this.handleClick} id='3'>3</button>
+          <button className='btn btn-lg btn-danger px-3 m-1' onClick={this.handleClick} id='4'>4</button>
+          <button className='btn btn-lg btn-danger px-3 m-1' onClick={this.handleClick} id='5'>5</button>
+        </div>
 
-        <div className='p-2'>
-          <h3>Filter options</h3>
-          <p>Show only one of the following filters</p>
-          <button onClick={this.handleClickSimple}>RESET FILTERS</button>
-          <button onClick={this.handleClickComplex}>EXCLUDE THESE FILTERS</button>
-        </div>
-        <div className='p-2'>
-          {
-            Object.getOwnPropertyNames(this.state.filters).map(item => {
-              return <button className='' key={item} id={item} onClick={this.handleClickSimple}>{item}</button>
-            })
-          }
-        </div>
-        <div className='p-2'>
-          <ul>
+        {
+          this.state.links.length > 0 &&
+
+        <div className='p-2 '>
+          <div className='py-2 text-center bg-light'>
+            <h3>Filter options</h3>
+            <p>Show only one of the following filters</p>
+          </div>
+        
+          <div className='py-1 mb-3 bg bg-light'>
             {
-              this.state.links.map(link => {
-                return <li key={link}>
-                  <a href={link}>{link}</a>
-                </li>
+              Object.getOwnPropertyNames(this.state.filters).map(item => {
+                return <button className='p-1 m-1 btn btn-info' key={item} id={item} onClick={this.handleClickSimple}>{item}</button>
               })
             }
-          </ul>
+            <div className='text-center'>
+              <p>or</p>
+              <button className='p-1 m-1 btn btn-success' onClick={this.handleClickSimple}>RESET FILTERS</button>
+              <button className='p-1 m-1 btn btn-warning' onClick={this.handleClickComplex}>EXCLUDE THESE FILTERS</button>
+            </div>
+          </div>
+        
+
+            <ul className='row p-2 bg bg-light '>
+              {
+                this.state.filteredData.map(link => {
+                  return <li key={link} id='list' className='col-6 py-2 text-center'>
+                    <a href={link}>{link.split('/').pop().replace(/-/g,' ')}</a>
+                  </li>
+                })
+              }
+            </ul>
+
+        
         </div>
+        }
        
       </>
     )
