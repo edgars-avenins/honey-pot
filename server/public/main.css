@@ -1,0 +1,30 @@
+body { 
+    padding-top: 70px;
+    background-color: lightseagreen;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+#list:nth-child(4n+1) {
+    background-color: rgb(230, 230, 230);
+}
+#list:nth-child(4n) {
+    background-color: rgb(230, 230, 230);
+}
+#list:nth-child(4n+2) {
+    background-color: rgb(167, 167, 167);
+}
+#list:nth-child(4n+3) {
+    background-color: rgb(168, 168, 168);
+}
+#list {
+    list-style-type: none;
+    font-family: Helvetica, Georgia, sans-serif;
+}
+
+/* overrides */
+
+ul {
+    padding-inline-start: 0px;
+}
