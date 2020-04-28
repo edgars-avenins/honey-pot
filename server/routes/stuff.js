@@ -10,8 +10,12 @@ router.get('/:year', (req, res) => {
     request('get', url)
         .then(data => {
             func(data, req.params.year, xmlFound => {
+                console.log(xmlFound);
+                
                 request('get', xmlFound[0])
                     .then(news => {
+                        console.log(news);
+                        
                         filter.dataFilter(news, xmlFound[0], data =>{
                             res.json(data)
                         })
