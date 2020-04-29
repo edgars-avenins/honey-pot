@@ -64,13 +64,13 @@ class StuffToday extends React.Component {
             <p>Show only one of the following filters</p>
           </div>
         
-          <div className='py-1 mb-3 bg bg-light text-center'>
+          <div className='py-1 mb-3 bg bg-light text-center boxShadow'>
             {
               Object.getOwnPropertyNames(this.state.filters).map(item => {
                 return <button className='p-1 m-1 btn btn-info' key={item} id={item} onClick={this.handleClickSimple}>{item}</button>
               })
             }
-            <div className='text-center'>
+            <div className='text-center boxShadow'>
               <p>or</p>
               <button className='p-1 m-1 btn btn-success' onClick={this.handleClickSimple}>RESET FILTERS</button>
               <button className='p-1 m-1 btn btn-warning' onClick={this.handleClickComplex}>EXCLUDE THESE FILTERS</button>
@@ -78,7 +78,7 @@ class StuffToday extends React.Component {
           </div>
         
 
-            <ul className='row p-2 bg bg-light '>
+            <ul className='row p-2 bg bg-light boxShadow'>
               {
                 this.state.filteredData.map(link => {
                   return <li key={link} id='list' className='col-6 py-2 text-center'>
