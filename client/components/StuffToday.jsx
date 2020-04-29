@@ -21,6 +21,7 @@ class StuffToday extends React.Component {
         this.setState({
           links: data.dataArray,
           filteredData: data.dataArray,
+          categories: data.categorizedFilter,
           filters: data.filter
         })
       })

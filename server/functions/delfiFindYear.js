@@ -7,11 +7,7 @@ function getYearData(data, year, callback){
     let dateArr = date.split('/')
     let targetDate = [year, dateArr[0].length == 1 ? '0' + dateArr[0] : dateArr[0], dateArr[1].length == 1 ? '0' + dateArr[1] : dateArr[1]].join('-')
 
-    console.log(targetDate);
-    
-
-    console.log(getProportion(date));
-    
+        
 
 
     let switcher = true
@@ -22,12 +18,11 @@ function getYearData(data, year, callback){
     let i = 1
 
     recGetData()
-        //.then(data => callback(data))
 
     function recGetData(){ // recursively gather data by offsetting initial starting position
 
         matchedDataLength = matchedData.length
-        
+
         getData(dataArray[Math.floor(dataArray.length * getProportion(date)) + offSet], res => { // proportionally pick one
             matchedData = matchedData.concat(getLinksForDate(res, targetDate))
             //console.log('Recursive:\nswitcher: ',switcher,'\n','offSet:',offSet,'i:',i,'\n','data length:',matchedData.length , matchedDataLength,'\n\n');

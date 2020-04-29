@@ -47,7 +47,6 @@ function dataFilter(rawData, url, callback){
         newFilter.push(newPair)
     })
     
-    console.log(newFilter);
     
     let doneFilter = {}
     
@@ -75,8 +74,6 @@ function dataFilter(rawData, url, callback){
         })
     })
     
-    console.log(doneFilter);
-    console.log(filter);
     
 
 
