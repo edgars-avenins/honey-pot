@@ -46,13 +46,13 @@ class StuffToday extends React.Component {
     //nestrada filtrs -salabo!
     return (
       <>
-        <div className='text-center pb-5'>
-          <h1>Today {this.state.years ? this.state.years : '...'} years ago</h1>
-          <button className='btn btn-lg btn-danger px-3 m-1' onClick={this.handleClick} id='1'>1</button>
-          <button className='btn btn-lg btn-danger px-3 m-1' onClick={this.handleClick} id='2'>2</button>
-          <button className='btn btn-lg btn-danger px-3 m-1' onClick={this.handleClick} id='3'>3</button>
-          <button className='btn btn-lg btn-danger px-3 m-1' onClick={this.handleClick} id='4'>4</button>
-          <button className='btn btn-lg btn-danger px-3 m-1' onClick={this.handleClick} id='5'>5</button>
+        <div className='text-center pb-5 bg-light mt-3'>
+          <h1>Today {this.state.years ? this.state.years : '...'} {this.state.years == 1 ? 'year' : "years"} ago</h1>
+          <button className='btn btn-lg px-3 m-1' onClick={this.handleClick} id='1'>1</button>
+          <button className='btn btn-lg px-3 m-1' onClick={this.handleClick} id='2'>2</button>
+          <button className='btn btn-lg px-3 m-1' onClick={this.handleClick} id='3'>3</button>
+          <button className='btn btn-lg px-3 m-1' onClick={this.handleClick} id='4'>4</button>
+          <button className='btn btn-lg px-3 m-1' onClick={this.handleClick} id='5'>5</button>
         </div>
 
         {
@@ -81,7 +81,7 @@ class StuffToday extends React.Component {
             <ul className='row p-2 bg bg-light boxShadow'>
               {
                 this.state.filteredData.map(link => {
-                  return <li key={link} id='list' className='col-6 py-2 text-center'>
+                  return <li key={link}  className='col-6 py-2 text-center list'>
                     <a href={link}>{link.split('/').pop().replace(/-/g,' ')}</a>
                   </li>
                 })
