@@ -1,0 +1,44 @@
+body { 
+    padding-top: 70px;
+    background-color: #142850;
+}
+h1,h2,h3,h4,h5,h6 {
+    font-family: Arial, Helvetica, sans-serif;
+    text-shadow: 1px 1px 1px #ccc;
+}
+
+.list:nth-child(4n+1) {
+    background-color: #00909E;
+}
+.list:nth-child(4n+2) {
+    background-color: #00909E;
+}
+.list:nth-child(2n+2) {
+    border-left: lightslategray 1px solid;
+}
+.list {
+    list-style-type: none;
+    font-family: Helvetica, Georgia, sans-serif;
+}
+.boxShadow {
+    box-shadow: 0 0 0.2em 0.2em rgb(214, 214, 214);
+}
+.listItems {
+    color: black;
+    list-style-type: none;
+}
+.pointer {
+    cursor: pointer;
+}
+/* overrides */
+
+ul {
+    padding-inline-start: 0px;
+}
+a {
+    color: black
+}
+button {
+    background-color: #27496d!important;
+    color: #DAE1E7!important
+}

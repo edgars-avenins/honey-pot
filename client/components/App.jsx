@@ -5,6 +5,7 @@ import {Nav} from './Nav'
 import GetXML from './GetXML'
 import StuffToday from './StuffToday'
 import DelfiToday from './DelfiToday'
+import { Home } from './Home'
 
 class App extends React.Component {
   constructor(props) {
@@ -19,6 +20,8 @@ class App extends React.Component {
     return (
       <Router>
         <Route path='/' component={Nav}/>
+        <Route exact path='/' component={Home} />
+
         <Route path='/xml' component={GetXML}/>
         <Route path='/stuff' component={StuffToday}/>
         <Route path='/delfi' component={DelfiToday}/>

@@ -87,38 +87,41 @@ class GetXML extends React.Component {
     const siteXMLOptions = this.state.availableXML
     return (
       <>
-        <h1>Get robots.txt data</h1>
-        <form onSubmit={this.handleSubmit}>
-          <label>
-            <input type="text" name="url" onChange={this.handleChange} />
-          </label>
-          <input type="submit" />
-        </form>
+        <div className='bg-light p-2 mb-2 mt-3'>
+          <h1 className='text-center'>Get robots.txt data</h1>
+          <hr className='m-0 mb-3'/>
+          <form onSubmit={this.handleSubmit}>
+            <label>
+              <input type="text" name="url" onChange={this.handleChange} />
+            </label>
+            <input type="submit" />
+          </form>
+        </div>
 
         {
           siteXMLData &&
           <>
-            <div className='p-2'>
+            <div className='bg-light p-2 mb-2'>
               <h1>All the possible links on this site</h1>
               <h3>Filter options</h3>
               <p>Show only one of the following filters</p>
-              <button onClick={this.handleClick}>RESET FILTERS</button>
-              <button onClick={this.handleClickComplex}>EXCLUDE THESE FILTERS</button>
+              <button className='btn btn-info mr-1' onClick={this.handleClick}>RESET FILTERS</button>
+              <button className='btn btn-info' onClick={this.handleClickComplex}>EXCLUDE THESE FILTERS</button>
             </div>
-            <div className='p-2'>
+            <div className='bg-light p-2'>
               {
                 Object.getOwnPropertyNames(this.state.filters).map(item => {
-                  return <button className='' key={item} id={item} onClick={this.handleClick}>{item}</button>
+                  return <button className='btn btn-info m-1' key={item} id={item} onClick={this.handleClick}>{item}</button>
                 })
               }
             </div>
-            <ul>
+            <ul className='row bg-light p-2 boxShadow'>
               {siteXMLData.map((item, i) => {
-                return <li key={i}>
+                return <li key={i} className='list listItems col-6 py-2 text-center pointer'>
                   {/* make a function that decides if the link is .xml
                 go deeper into the xml tree otherwise show an 
                 a tag link to the actual page */}
-                  <a href={item}>{item}</a>
+                  <a href={item}>{item.split('/').pop().replace(/-/g,' ')}</a>
                 </li>
               })}
             </ul>
@@ -127,19 +130,30 @@ class GetXML extends React.Component {
         {
           (!siteXMLData && siteXMLOptions) &&
           <>
-            <div className='p-2'>
+            <div className='bg-light p-2 mb-2'>
               <h1>All the possible xml sitemaps on this site</h1>
               <p>Choose one to display its content</p>
             </div>
-            <ul>
+            <ul className='row bg-light p-2 boxShadow'>
               {
                 siteXMLOptions.map(item => {
-                  return <li onClick={this.handleXMLOption} id={item} key={item}>
+                  return <li className='list listItems col-6 py-2 text-center pointer' onClick={this.handleXMLOption} id={item} key={item}>
                     {item}
                   </li>
                 })
               }
             </ul>
+            {/* 
+            <ul className='row p-2 bg bg-light boxShadow'>
+              {
+                this.state.filteredData.map(link => {
+                  return <li key={link} id='list' className='col-6 py-2 text-center'>
+                    <a href={link}>{link.split('/').pop().replace(/-/g,' ')}</a>
+                  </li>
+                })
+              }
+            </ul>
+            */}
           </>
         }
         {
