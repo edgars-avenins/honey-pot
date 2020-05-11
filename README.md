@@ -5,3 +5,4 @@ https://delfi.lv/ atgriez vairakus xml failus ar rakstiem no talaa 99. gada. Sak
 Kas bija zinas sodien pirms 1/2/3/4/5/6/7/8/9/10 gadiem
 Dod man random zinu materialu no 1999 - 2010 gadam
 
+Fix the bloody navbar collapse and add how it works page also dive into the delfi recursive algorithm
