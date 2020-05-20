@@ -8,7 +8,7 @@ const func = require('../functions/xml2links')
 router.post('/robots', (req, res) => {
     const {url} = req.body
     const fullUrl = url + 'robots.txt'
-    
+    console.log(fullUrl)
     
     request('get', fullUrl)
         .then(html => {
@@ -16,7 +16,21 @@ router.post('/robots', (req, res) => {
                 res.json(data)
             })
         })
-        .catch(err => console.error(err.error)
+        .catch(err => {
+            console.error('Error:',err.error ? err.error : 'No Robots')
+            
+            request('get', url + 'sitemap.xml')
+            .then(html => {           
+                func.dataFilter(html, url, (data) => {
+                    res.json(data)
+                })
+            })
+            .catch(err => {
+                console.error('\n',err.response,'\n')
+                //res.json(err.response.error)
+                res.status(err.response.status).json(err.response.text)
+            })
+        }
         )
 })
 
