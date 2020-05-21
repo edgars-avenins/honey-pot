@@ -25,19 +25,28 @@ class GetXML extends React.Component {
     })
     getRobotData({ url: this.state.url })
       .then(data => {
-        if (data.length == 0) {
+        if (!data) {
           this.setState({
             noData: true
           })
         } else {
-          if (data.isXML && !data.isXML)
+          if (data.isXML && !data.isXML){
             this.setState({
               sitemapXML: data.dataArray,
               filteredXML: data.dataArray,
               filters: data.filter
             })
+          }
           else {
-            this.setState({ availableXML: data })
+            if(Object.keys(data).length > 1){
+                  this.setState({
+                    sitemapXML: data.dataArray,
+                    filteredXML: data.dataArray,
+                    filters: data.filter
+                  })
+            }else{
+              this.setState({ availableXML: data })
+            }
           }
 
         }
