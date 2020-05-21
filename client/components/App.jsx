@@ -1,7 +1,7 @@
 import React from 'react'
 import { HashRouter as Router, Route} from 'react-router-dom'
 
-import {Nav} from './Nav'
+import Nav from './Nav'
 import GetXML from './GetXML'
 import StuffToday from './StuffToday'
 import DelfiToday from './DelfiToday'
