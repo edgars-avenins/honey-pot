@@ -120,4 +120,4 @@ function getProportion(date){
     return prop
 }
 
-module.exports = getYearData
+module.exports = {getYearData}

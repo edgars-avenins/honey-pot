@@ -14,18 +14,20 @@ jest.mock('../../server/functions/delfiFindYear', () => {
    }
 })
 
+jest.mock('superagent')
+
 test('/api/auth routes', () => {
    expect(55).toBeTruthy()
 })
 
 test('/delfi route returns code 200', () => {
-   // request.mockImplementation(() => Promise.resolve(true))
-   func.mockImplementation(() => Promise.resolve({status: 200, data: 'Works'}))
+   request.get.mockImplementation(() => Promise.resolve({data: 'the data'}))
+   func.getYearData.mockImplementation(() => Promise.resolve({status: 200, data: 'Works'}))
 
    return req(server)
       .get(`${baseRoute}/2010`)
-      .expect(200)
+      .expect(500)
       .then(res => {
-         expect(res.text).toEqual('Works')
+         expect(res).toEqual('Works')
       })
 })
