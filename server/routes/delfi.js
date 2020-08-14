@@ -9,7 +9,7 @@ router.get('/:year', (req, res) => {
     request('get', url)
         .then(html => {
             func(html, req.params.year, data => {
-                res.json(data)
+                res.status(200).json(data)
             })
         })
 })
