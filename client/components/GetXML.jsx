@@ -130,7 +130,7 @@ class GetXML extends React.Component {
                   {/* make a function that decides if the link is .xml
                 go deeper into the xml tree otherwise show an 
                 a tag link to the actual page */}
-                  <a href={item}>{item.split('/').pop().replace(/-/g,' ')}</a>
+                  <a href={item}>{item.split('/').pop().replace(/-/g,' ') || item}</a>
                 </li>
               })}
             </ul>
