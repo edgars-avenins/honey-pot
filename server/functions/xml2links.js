@@ -1,13 +1,18 @@
 
 function dataFilter(rawData, url, callback){
+    console.log(rawData.text)
     let dataArray = []
-    if(rawData.text){
-        dataArray = rawData.text.split(/<loc>(.*?)<\/loc>/)
+    if(rawData.text.includes('<loc>')){
+        if(rawData.text){
+            dataArray = rawData.text.split(/<loc>(.*?)<\/loc>/)
+        }else{
+            dataArray = rawData.body.toString().split(/<loc>(.*?)<\/loc>/)
+        }
     }else{
-        dataArray = rawData.body.toString().split(/<loc>(.*?)<\/loc>/)
+        dataArray = rawData.text.split(/\/\n/)
     }
     dataArray = dataArray.filter(item => !item.includes('<'))
-    
+    console.log(dataArray)
     let filter = { }
     let isXML = false
 
@@ -74,7 +79,6 @@ function dataFilter(rawData, url, callback){
         })
         return item
     })
-    
     
 
 
