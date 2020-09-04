@@ -3,7 +3,7 @@ import React from 'react'
 export const Home = () => (
     <>
         {/* Header */}
-        <section id="header">
+        <section role='heading' id="header">
             <div className="inner">
                 <span className="icon solid major fa-cloud"></span>
                 <h1>Hi, this site offers a use for <br/> sitemap.xml files <br/> found almost on all websites.</h1>
@@ -15,7 +15,7 @@ export const Home = () => (
         </section>
 <hr/>
         {/* One */}
-        <section id="one" className="main style1">
+        <section role='sectionItem' id="one" className="main style1">
             <div className="container">
                 <div className="row gtr-150">
                     <div className="col-md-6 col-xs-12">
@@ -31,7 +31,7 @@ export const Home = () => (
             </div>
         </section>
 <hr/>
-        <section className="main style1">
+        <section role='sectionItem' className="main style1">
             <div className="container">
                 <div className="row gtr-150">
                     <div className="col-md-6 col-xs-12">
@@ -48,7 +48,7 @@ export const Home = () => (
         </section>
 <hr/>
         {/* Two */}
-        <section id="three" className="main style1 special mb-3">
+        <section role='sectionItem' id="three" className="main style1 special mb-3">
             <div className="container">
                 <header className="major">
                     <h2>Contents of this page</h2>
@@ -60,7 +60,7 @@ export const Home = () => (
                         <h3>What's hidden there?</h3>
                         <p>Just type in the site you're interested in and see if there is any hidden links laying around.</p>
                         <ul className="actions special">
-                            <li><a href="#xml" className="button">More</a></li>
+                            <li role='featureItemLink'><a href="#xml" className="button">More</a></li>
                         </ul>
                     </div>
                     <div className="col-md-4 col-xs-12">
@@ -69,7 +69,7 @@ export const Home = () => (
                         <h3>Hot yesterday</h3>
                         <p>By carefully unwrapping stuff sitemap.xml I managed to create this peek into past with nice filter options.</p>
                         <ul className="actions special">
-                            <li><a href="#stuff" className="button">More</a></li>
+                            <li role='featureItemLink'><a href="#stuff" className="button">More</a></li>
                         </ul>
                         </div>
                     </div>
@@ -78,7 +78,7 @@ export const Home = () => (
                         <h3>What's going on in Latvia?</h3>
                         <p>Similar to stuff but way more challenging because of the way data was saved. Have a peek in the past.</p>
                         <ul className="actions special">
-                            <li><a href="#delfi" className="button">More</a></li>
+                            <li role='featureItemLink'><a href="#delfi" className="button">More</a></li>
                         </ul>
                     </div>
                 </div>
