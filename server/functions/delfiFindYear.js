@@ -7,13 +7,9 @@ function getYearData(data, year, callback){
     let dateArr = date.split('/')
     let targetDate = [year, dateArr[0].length == 1 ? '0' + dateArr[0] : dateArr[0], dateArr[1].length == 1 ? '0' + dateArr[1] : dateArr[1]].join('-')
 
-    console.log(targetDate);
+    // console.log(targetDate);
+    // console.log(getProportion(date));
     
-
-    console.log(getProportion(date));
-    
-
-
     let switcher = true
     let offSet = 0
     let matchedData = []
@@ -22,39 +18,39 @@ function getYearData(data, year, callback){
     let i = 1
 
     recGetData()
-        //.then(data => callback(data))
 
     function recGetData(){ // recursively gather data by offsetting initial starting position
 
-        matchedDataLength = matchedData.length
+        matchedDataLength = matchedData.length //save previous data length
         
         getData(dataArray[Math.floor(dataArray.length * getProportion(date)) + offSet], res => { // proportionally pick one
-            matchedData = matchedData.concat(getLinksForDate(res, targetDate))
-            //console.log('Recursive:\nswitcher: ',switcher,'\n','offSet:',offSet,'i:',i,'\n','data length:',matchedData.length , matchedDataLength,'\n\n');
+            matchedData = matchedData.concat(getLinksForDate(res, targetDate)) //get new data value
+            // uncomment to see in action with the "Delfi" part
+            // console.log('Recursive:\nswitcher: ',switcher,'\n','offSet:',offSet,'i:',i,'\n','data length:',matchedData.length , matchedDataLength,'\n\n');
             
-            if(matchedDataLength == matchedData.length){
-                if(i == 1 && matchedDataLength != 0){
-                    offSet = 1
+            if(matchedDataLength == matchedData.length){ //while this is true the code is searching by incrementing its step by 1 in each
+                if(i == 1 && matchedDataLength != 0){ //if proportion was good enough to guess with 1st try then check at the very end also in the opposite direction
+                    offSet = 1 //because if found on first try means that the offset goes in negatives always flip to positive to check positive offset direction as well 
                 }else{
-                    if(!dataFound){
-                        if(switcher){
+                    if(!dataFound){ //as long as there is nothing foumd this block exectues
+                        if(switcher){ //handles the direction(postivie or negative) and by setting offSet to i value it checks all records
                             offSet += i
                             switcher = !switcher
                         }else{
                             offSet -= i
                             switcher = !switcher
                         }
-                    }else{
-                        callback(getLinks(matchedData))
+                    }else{ //we get here if data was found and no longer new records are being found
+                        return callback(getLinks(matchedData))
                     }
                 }
                 i++
-            }else{
+            }else{ //this block actives the !datafound else block while also keeps offsetting in the direction something was found in
                 dataFound = true
                 if(offSet > 0)offSet++
                 else offSet--
             }
-            recGetData()
+            recGetData() //repeat
         })
     }
 
